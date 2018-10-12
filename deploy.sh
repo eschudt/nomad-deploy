@@ -7,6 +7,7 @@ serviceCount=$4
 
 echo "Deploying ${jobName} on ${serverIp} with build ${buildVersion} and ${serviceCount} instances...\n"
 
-ssh root@${serverIp} "/root/startJob.sh ${jobName} ${buildVersion} ${serviceCount}"
+vaultToken=`grep "Initial Root Token" /root/vaultDetails.txt | cut -d' ' -f4`
+ssh root@${serverIp} "/root/startJob.sh ${jobName} ${buildVersion} ${serviceCount} ${vaultToken}"
 
 exit 0
